@@ -69,11 +69,11 @@ class NOT:
     return self.subformula.vars()
 
   def truthValue(self, v):
-    print([item for item in v if item != [self.subformula.name]])
-    return [self.subformula.name] not in v
+    v = sorted(v)
+    return [self.subformula.name] != v[1]
   
   def tvals(self, v):
-    return [item for item in v if item == [self.name] for item in item][0]
+    return [item for item in v if item == [self.subformula.name] for item in item][0]
     
 # ATOM - atomic formulas
 class ATOM:
@@ -173,7 +173,7 @@ def logicalConsequence(f1,f2):
 
 if __name__ == "__main__":
   A = ATOM('A')
-  B = NOT(ATOM("B"))
+  B = NOT(ATOM("A"))
   F = BinaryFormula(A,B)
 
 print(satisfiable(F))
