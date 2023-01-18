@@ -106,116 +106,116 @@ else:
 ### The party example from the lecture
 ###
 
-PARTY1 = chainAND([IMPL(NOT(B),NOT(A)),
-                   OR(NOT(B),NOT(C)),
-                   OR(C,D),
-                   IMPL(AND(A,E),D),
-                   NOT(AND(B,D))])
+# PARTY1 = chainAND([IMPL(NOT(B),NOT(A)),
+#                    OR(NOT(B),NOT(C)),
+#                    OR(C,D),
+#                    IMPL(AND(A,E),D),
+#                    NOT(AND(B,D))])
 
-print("Solution to PARTY1: ",end='')
-print(satisfiable(PARTY1))
+# print("Solution to PARTY1: ",end='')
+# print(satisfiable(PARTY1))
 
-# More complicated party with more guests and constraints
+# # More complicated party with more guests and constraints
 
-PARTY2 = chainAND([IMPL(NOT(B),NOT(A)),
-                   OR(NOT(B),NOT(C)),
-                   OR(C,D),
-                   IMPL(AND(A,E),D),
-                   NOT(AND(B,D)),
-                   OR(E,OR(F,OR(G,H))),
-                   IMPL(OR(H,I),OR(NOT(J),NOT(K))),
-                   IMPL(AND(I,K),IMPL(L,M))
-])
+# PARTY2 = chainAND([IMPL(NOT(B),NOT(A)),
+#                    OR(NOT(B),NOT(C)),
+#                    OR(C,D),
+#                    IMPL(AND(A,E),D),
+#                    NOT(AND(B,D)),
+#                    OR(E,OR(F,OR(G,H))),
+#                    IMPL(OR(H,I),OR(NOT(J),NOT(K))),
+#                    IMPL(AND(I,K),IMPL(L,M))
+# ])
 
-print("Solution to PARTY2: ",end='')
-print(satisfiable(PARTY2))
+# print("Solution to PARTY2: ",end='')
+# print(satisfiable(PARTY2))
 
-# An even more complicated party
+# # An even more complicated party
 
-PARTY3 = chainAND([IMPL(NOT(B),NOT(A)),
-                   OR(NOT(B),NOT(C)),
-                   OR(C,D),
-                   IMPL(AND(A,E),D),
-                   NOT(AND(B,D)),
-                   OR(E,OR(F,OR(G,H))),
-                   IMPL(OR(H,I),OR(NOT(J),NOT(K))),
-                   IMPL(AND(I,K),IMPL(L,M)),
-                   EQVI(OR(M,NOT(N)),IMPL(O,P)),
-                   IMPL(NOT(B),EQVI(P,OR(Q,NOT(R)))),
-                   OR(R,OR(NOT(S),NOT(T)))
-])
+# PARTY3 = chainAND([IMPL(NOT(B),NOT(A)),
+#                    OR(NOT(B),NOT(C)),
+#                    OR(C,D),
+#                    IMPL(AND(A,E),D),
+#                    NOT(AND(B,D)),
+#                    OR(E,OR(F,OR(G,H))),
+#                    IMPL(OR(H,I),OR(NOT(J),NOT(K))),
+#                    IMPL(AND(I,K),IMPL(L,M)),
+#                    EQVI(OR(M,NOT(N)),IMPL(O,P)),
+#                    IMPL(NOT(B),EQVI(P,OR(Q,NOT(R)))),
+#                    OR(R,OR(NOT(S),NOT(T)))
+# ])
 
-# COMMENT: The calls to 'satisfiable' have been commented out because
-# you might run out of memory. Try carefully.
+# # COMMENT: The calls to 'satisfiable' have been commented out because
+# # you might run out of memory. Try carefully.
 
-#print("Solution to PARTY3: ",end='')
-#print(satisfiable(PARTY3))
+# #print("Solution to PARTY3: ",end='')
+# #print(satisfiable(PARTY3))
 
-PARTY4 = chainAND([IMPL(NOT(B),NOT(A)),
-                   OR(NOT(B),NOT(C)),
-                   OR(C,D),
-                   IMPL(AND(A,E),D),
-                   NOT(AND(B,D)),
-                   OR(E,OR(F,OR(G,H))),
-                   IMPL(OR(H,I),OR(NOT(J),NOT(K))),
-                   IMPL(AND(I,K),IMPL(L,M)),
-                   EQVI(OR(M,NOT(N)),IMPL(O,P)),
-                   IMPL(NOT(B),EQVI(P,OR(Q,NOT(R)))),
-                   OR(R,OR(NOT(S),NOT(T))),
-                   OR(NOT(U),NOT(V)),
-                   IMPL(Z,NOT(Y)),
-                   IMPL(W,OR(X,A))
-])
+# PARTY4 = chainAND([IMPL(NOT(B),NOT(A)),
+#                    OR(NOT(B),NOT(C)),
+#                    OR(C,D),
+#                    IMPL(AND(A,E),D),
+#                    NOT(AND(B,D)),
+#                    OR(E,OR(F,OR(G,H))),
+#                    IMPL(OR(H,I),OR(NOT(J),NOT(K))),
+#                    IMPL(AND(I,K),IMPL(L,M)),
+#                    EQVI(OR(M,NOT(N)),IMPL(O,P)),
+#                    IMPL(NOT(B),EQVI(P,OR(Q,NOT(R)))),
+#                    OR(R,OR(NOT(S),NOT(T))),
+#                    OR(NOT(U),NOT(V)),
+#                    IMPL(Z,NOT(Y)),
+#                    IMPL(W,OR(X,A))
+# ])
 
-#print("Solution to PARTY4: ",end='')
-#print(satisfiable(PARTY4))
+# #print("Solution to PARTY4: ",end='')
+# #print(satisfiable(PARTY4))
 
-###
-### The 3-bit Binary Adder from the lecture
-###
+# ###
+# ### The 3-bit Binary Adder from the lecture
+# ###
 
-A0 = ATOM("A0")
-A1 = ATOM("A1")
-A2 = ATOM("A2")
-B0 = ATOM("B0")
-B1 = ATOM("B1")
-B2 = ATOM("B2")
-C0 = ATOM("C0")
-C1 = ATOM("C1")
-C2 = ATOM("C2")
-S0 = ATOM("S0")
-S1 = ATOM("S1")
-S2 = ATOM("S2")
+# A0 = ATOM("A0")
+# A1 = ATOM("A1")
+# A2 = ATOM("A2")
+# B0 = ATOM("B0")
+# B1 = ATOM("B1")
+# B2 = ATOM("B2")
+# C0 = ATOM("C0")
+# C1 = ATOM("C1")
+# C2 = ATOM("C2")
+# S0 = ATOM("S0")
+# S1 = ATOM("S1")
+# S2 = ATOM("S2")
 
-def XOR(f1,f2):
-  return EQVI(f1,NOT(f2))
+# def XOR(f1,f2):
+#   return EQVI(f1,NOT(f2))
 
-ADDER = chainAND([EQVI(S0,XOR(A0,B0)),
-                  EQVI(C0,AND(A0,B0)),
-                  EQVI(S1,XOR(C0,XOR(A1,B1))),
-                  EQVI(C1,OR(AND(C0,XOR(A1,B1)),AND(A1,B1))),
-                  EQVI(S2,XOR(C1,XOR(A2,B2))),
-                  EQVI(C2,OR(AND(C1,XOR(A2,B2)),AND(A2,B2)))])
+# ADDER = chainAND([EQVI(S0,XOR(A0,B0)),
+#                   EQVI(C0,AND(A0,B0)),
+#                   EQVI(S1,XOR(C0,XOR(A1,B1))),
+#                   EQVI(C1,OR(AND(C0,XOR(A1,B1)),AND(A1,B1))),
+#                   EQVI(S2,XOR(C1,XOR(A2,B2))),
+#                   EQVI(C2,OR(AND(C1,XOR(A2,B2)),AND(A2,B2)))])
 
-### Test cases for the adder:
+# ### Test cases for the adder:
 
-print("Adder with inputs 111B+111B (7+7) : ",end='')
-print(satisfiable(chainAND([ADDER,A0,A1,A2,B0,B1,B2])))
+# print("Adder with inputs 111B+111B (7+7) : ",end='')
+# print(satisfiable(chainAND([ADDER,A0,A1,A2,B0,B1,B2])))
 
-print("Adder with output 1110B=14: ",end='')
-print(satisfiable(chainAND([ADDER,NOT(S0),S1,S2,C2])))
+# print("Adder with output 1110B=14: ",end='')
+# print(satisfiable(chainAND([ADDER,NOT(S0),S1,S2,C2])))
 
-print("Adder with output 1010B=10: ",end='')
-print(satisfiable(chainAND([ADDER,S0,NOT(S1),S2,NOT(C2)])))
+# print("Adder with output 1010B=10: ",end='')
+# print(satisfiable(chainAND([ADDER,S0,NOT(S1),S2,NOT(C2)])))
 
-print("Adder with inputs 7+0= : ",end='')
-print(satisfiable(chainAND([ADDER,A0,A1,A2,NOT(B0),NOT(B1),NOT(B2)])))
+# print("Adder with inputs 7+0= : ",end='')
+# print(satisfiable(chainAND([ADDER,A0,A1,A2,NOT(B0),NOT(B1),NOT(B2)])))
 
-print("Adder inputs 0+7= : ",end='')
-print(satisfiable(chainAND([ADDER,NOT(A0),NOT(A1),NOT(A2),B0,B1,B2])))
+# print("Adder inputs 0+7= : ",end='')
+# print(satisfiable(chainAND([ADDER,NOT(A0),NOT(A1),NOT(A2),B0,B1,B2])))
 
-print("Adder with equal inputs and non-zero output: ",end='')
-print(satisfiable(chainAND([ADDER,EQVI(A0,B0),EQVI(A1,B1),EQVI(A2,B2),OR(S0,OR(S1,S2))])))
+# print("Adder with equal inputs and non-zero output: ",end='')
+# print(satisfiable(chainAND([ADDER,EQVI(A0,B0),EQVI(A1,B1),EQVI(A2,B2),OR(S0,OR(S1,S2))])))
 
 ### Test cases for logicalConsequence
 
