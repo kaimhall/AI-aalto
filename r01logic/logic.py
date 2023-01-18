@@ -142,12 +142,15 @@ def powerSet(atoms):
     return base + [(b + operator) for b in base] # communicate frame to future frames
 
 def satisfiable(f:BinaryFormula):
-  names = [*f.vars(),] # unpack vars to list
-  v = powerSet(names)  #generate subsets
-  print(f.subformula1.vars())
-  print(f.subformula2.vars())
-  print(f.vars())
-  return f.truthValue(v)
+  v = powerSet([*f.vars(),])
+  v1 = powerSet([*f.subformula1.vars(),])
+  v2 = powerSet([*f.subformula2.vars(),])
+  
+  t = f.truthValue(v)
+  t1 = f.subformula1.truthValue(v1)
+  t2 = f.subformula1.truthValue(v2)
+  r = t,t1,t2
+  return r
   
 '''
   Test logical consequence
@@ -168,9 +171,8 @@ if __name__ == "__main__":
   A = ATOM('A')
   B = ATOM('B')
   C = ATOM('C')
-  f = AND(A,B)
 
-  print(satisfiable(AND(A, NOT(A))))
+  print(satisfiable(AND(A, NOT(B))))
 
   
 
