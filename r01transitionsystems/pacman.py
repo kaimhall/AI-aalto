@@ -60,123 +60,107 @@ class PacManState:
         return (self.x == other.x) and (self.y == other.y) and (self.d == other.d)
 
     def moveNorth(self, x, y):
-        state = PacManState(x, y + 1, "N", self.grid)
-        hash = state.__hash__()
+        grid = self.grid
+        states = []
+        if not grid.occupied(x, y + 1):
+            state = PacManState(x, y + 1, "N", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if not grid.occupied(x + 1, y):
+            state = PacManState(x + 1, y, "E", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if not grid.occupied(x - 1, y):
+            state = PacManState(x + 1, y, "W", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if len(states) == 0:
+            state = PacManState(x, y - 1, "S", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
         return hash, state
 
     def moveSouth(self, x, y):
-        state = PacManState(x, y - 1, "S", self.grid)
-        hash = state.__hash__()
+        grid = self.grid
+        states = []
+        if not grid.occupied(x, y - 1):
+            state = PacManState(x, y - 1, "S", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if not grid.occupied(x - 1, y):
+            state = PacManState(x - 1, y, "W", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if not grid.occupied(x + 1, y):
+            state = PacManState(x + 1, y, "E", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if len(states) == 0:
+            state = PacManState(x, y + 1, "N", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
         return hash, state
 
     def moveEast(self, x, y):
-        # change the direction of movement 90 degrees to the left
-        state = PacManState(x + 1, y, "W", self.grid)
-        hash = state.__hash__()
+        grid = self.grid
+        states = []
+        if not grid.occupied(x + 1, y):
+            state = PacManState(x + 1, y, "E", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if not grid.occupied(x, y + 1):
+            state = PacManState(x, y + 1, "N", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if not grid.occupied(x, y - 1):
+            state = PacManState(x, y - 1, "S", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if len(states) == 0:
+            state = PacManState(x - 1, y, "W", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
         return hash, state
 
     def moveWest(self, x, y):
-        # change the direction of movement 90 degrees to the rigth
-        state = PacManState(x - 1, y, "E", self.grid)
-        hash = state.__hash__()
+        grid = self.grid
+        states = []
+        if not grid.occupied(x - 1, y):
+            state = PacManState(x - 1, y, "W", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if not grid.occupied(x, y + 1):
+            state = PacManState(x, y + 1, "N", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if not grid.occupied(x, y - 1):
+            state = PacManState(x, y - 1, "S", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
+        if len(states) == 0:
+            state = PacManState(x + 1, y, "E", self.grid)
+            hash = state.__hash__()
+            states.append((hash, state))
         return hash, state
-
-    def deadend(self, x, y):
-        if self.d == "N":
-            if (
-                self.grid.occupied(y + 1, x)
-                and self.grid.occupied(y, x + 1)
-                and self.grid.occupied(y, x - 1)
-            ):
-                state = PacManState(x, y - 1, "S", self.grid)
-                hash = state.__hash__()
-                return hash, state
-        elif self.d == "S":
-            if (
-                self.grid.occupied(y - 1, x)
-                and self.grid.occupied(y, x + 1)
-                and self.grid.occupied(y, x - 1)
-            ):
-                state = PacManState(x, y + 1, "N", self.grid)
-                hash = state.__hash__()
-                return hash, state
-        elif self.d == "E":
-            if (
-                self.grid.occupied(y, x + 1)
-                and self.grid.occupied(y + 1, x)
-                and self.grid.occupied(y - 1, x)
-            ):
-                state = PacManState(x - 1, y, "W", self.grid)
-                hash = state.__hash__()
-                return hash, state
-        elif self.d == "W":
-            if (
-                self.grid.occupied(y, x - 1)
-                and self.grid.occupied(y + 1, x)
-                and self.grid.occupied(y - 1, x)
-            ):
-                state = PacManState(x + 1, y, "E", self.grid)
-                hash = state.__hash__()
-                return hash, state
-        else:
-            return False
 
     # All possible successor states of a state
     def successors(self):
         grid = self.grid
         successor_states = []  # state hash name and state
+        for y in range(grid.ymax):
+            for x in range(grid.xmax):
 
-        for y in range(len(grid.grid)):
-            for x in range(len(grid.grid[0])):
-                ind = [0, 0, 0, 0]
+                n = self.moveNorth(x, y)
+                successor_states.append(n)
 
-                if not grid.occupied(x, y + 1):
-                    n = self.moveNorth(x, y)
-                    if not any(j == n[1] for (i, j) in successor_states):
-                        successor_states.append(n)
-                    if not grid.occupied(x, y - 1):
-                        s = self.moveSouth(x, y)
-                        if not any(j == s[1] for (i, j) in successor_states):
-                            successor_states.append(s)
-                    dead = n[1].deadend(x, y)
-                    if dead and not any(j == dead[1] for (i, j) in successor_states):
-                        successor_states.append((dead))
+                s = self.moveSouth(x, y)
+                successor_states.append(s)
 
-                if not grid.occupied(x, y - 1):
-                    s = self.moveSouth(x, y)
-                    if not any(j == s[1] for (i, j) in successor_states):
-                        successor_states.append(s)
-                    if not grid.occupied(x, y + 1):
-                        n = self.moveNorth(x, y)
-                        if not any(j == n[1] for (i, j) in successor_states):
-                            successor_states.append(n)
-                    dead = s[1].deadend(x, y)
-                    if dead and not any(j == dead[1] for (i, j) in successor_states):
-                        successor_states.append((dead))
+                e = self.moveEast(x, y)
+                successor_states.append(s)
 
-                if not grid.occupied(x + 1, y):
-                    e = self.moveEast(x, y)
-                    if not any(j == e[1] for (i, j) in successor_states):
-                        successor_states.append(e)
-                    if not grid.occupied(x - 1, y):
-                        w = self.moveWest(x, y)
-                        if not any(j == w[1] for (i, j) in successor_states):
-                            successor_states.append(w)
-                    dead = e[1].deadend(x, y)
-                    if dead and not any(j == dead[1] for (i, j) in successor_states):
-                        successor_states.append((dead))
-
-                if not grid.occupied(x - 1, y):
-                    w = self.moveWest(x, y)
-                    if not any(j == w[1] for (i, j) in successor_states):
-                        successor_states.append(w)
-                    if not grid.occupied(x + 1, y):
-                        e = self.moveEast(x, y)
-                        if not any(j == e[1] for (i, j) in successor_states):
-                            successor_states.append(e)
-                    dead = w[1].deadend(x, y)
-                    if dead and not any(j == dead[1] for (i, j) in successor_states):
-                        successor_states.append((dead))
+                w = self.moveWest(x, y)
+                successor_states.append(s)
 
         return successor_states
 

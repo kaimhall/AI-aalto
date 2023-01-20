@@ -1,0 +1,12 @@
+Results for the Transition Systems (Pac-Man) assignment
+Test 0 (reaching a goal state): PASS
+Test 1 (set of reachable states): FAIL (wrong number of reachable states: too many)
+Test 2 (turning around 180 degrees): Must have 1 successor in cul-de-sacs.
+FAIL
+Test 3 (turning 90 degrees or going forward): Should have 2 successor states but has 95.
+FAIL
+Test 4 (turning 90, -90 or 0 degrees): Should have 3 successor states but has 95.
+FAIL
+Test 5 (set of reachable states): FAIL (wrong number of reachable states: too many)
+Not enough passed test cases
+RESULT: 0 out of max. 30
